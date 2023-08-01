@@ -46,11 +46,10 @@ body * {
 }
 
 .chat-app-header {
-  width: 100%;
-  height: 14%;
-  /* position: fixed;
-  top: 0;
-  left: 0; */
+  /* width: 100%; */
+  /* height: 14%; */
+  /* position: relative; */
+
   border: 1px solid #8C53C6;
 
   display: flex;
@@ -351,99 +350,29 @@ span {
 
 .start-page-container {
 
-
+/* 
   width: 100%;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-
-
-}
-
-.start-page-container .start-page-nav {
-  padding: 10px 15px;
-  /* background-color: #f1f3f5; */
-  border: 1px solid #8C53C6;
-  position: relative;
-
-  display: flex;
-  align-items: center;
+  align-items: center; */
 
 
 }
 
 
-
-.start-page-nav-logo {
-  max-width: 100px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-.start-page-nav-menu {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 15px;
-}
-
-.start-page-nav-menu-container {
-  display: flex;
-  margin-right: 10px;
-}
-
-.start-page-nav-menu-container-item {
-  margin: 0 5px;
-  padding: 3px 10px;
-  background-color: #854ade;
-  border-radius: 15px;
-}
-
-.start-page-nav-menu-container-item .start-page-nav-menu-container-link {
-  color: #ebecf0;
-  font-size: 0.8rem;
-}
 
 .start-page-main {
 
   padding: 5px 3%;
-  width: 100%;
-  height: 66%;
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
-}
-
-.start-page-main .carouser-section {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-
+  /* width: 100%;
+  height: 66%; */
 
 }
 
-.start-page-main .login-section {
-  width: 52%;
-  height: 100%;
-  overflow: auto;
-  display: flex;
-  align-items: center;
 
-}
-
-.start-page-container .start-page-main .horizontal-dividing-line-container {
-  height: 100%;
-  width: 1%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
 
 .start-page-container .start-page-main .horizontal-dividing-line-container .line {
   width: 1px;
@@ -452,11 +381,69 @@ span {
 }
 
 
+/* user login section */
+
+
+
+
+
+.login-section-information .user-information-for-login {
+  border-bottom: 1px solid #7B7B7B;
+}
+
+.login-section-information .user-information-for-login .code-country-for-login {
+  border: 0;
+  background-color: transparent;
+  width: 10%;
+}
+
+.login-section-information .user-information-for-login .user-phone-for-login {
+  border: 0;
+  width: 90%;
+}
+
+.login-section .country-select-list {
+  border-bottom: 1px solid #7B7B7B;
+}
+
+.login-section .country-select-list select {
+  border: 0;
+}
+
+.login-section .country-select-list select:focus,
+.login-section-information .user-information-for-login .code-country-for-login:focus,
+.login-section-information .user-information-for-login .user-phone-for-login:focus {
+box-shadow: none;
+outline: none;
+}
+
+
+.login-section .submit-btn-for-login{
+  cursor: pointer;
+  color: #eee;
+  border: 0;
+  border-radius: 50Px;
+  padding: 10px;
+  width: 100px;
+  transition: box-shadow .3s ease-in-out;
+ 
+}
+
+.login-section .submit-btn-for-login:hover{
+  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
+  -webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
+  -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
+}
+
+
 
 .start-page-footer {
+  /* position: fixed;
+  left: 0;
+  bottom: 0; */
   direction: rtl;
-  width: 100%;
-  height: 20%;
+  /* width: 100%;
+  height: 20%; */
   background: rgb(134, 2, 223);
   background: linear-gradient(90deg, rgba(134, 2, 223, 1) 0%, rgba(224, 29, 253, 1) 50%, rgba(201, 69, 252, 1) 100%);
   display: flex;
@@ -476,6 +463,10 @@ span {
 }
 
 /* end start page carinae */
+
+
+
+
 
 /* about page carinae */
 .about-container {
@@ -624,51 +615,3 @@ span {
 
 
 
-/* user login section */
-.login-section-information .user-information-for-login {
-  border-bottom: 1px solid #7B7B7B;
-}
-
-.login-section-information .user-information-for-login .code-country-for-login {
-  border: 0;
-  background-color: transparent;
-  width: 10%;
-}
-
-.login-section-information .user-information-for-login .user-phone-for-login {
-  border: 0;
-  width: 90%;
-}
-
-.login-section .country-select-list {
-  border-bottom: 1px solid #7B7B7B;
-}
-
-.login-section .country-select-list select {
-  border: 0;
-}
-
-.login-section .country-select-list select:focus,
-.login-section-information .user-information-for-login .code-country-for-login:focus,
-.login-section-information .user-information-for-login .user-phone-for-login:focus {
-box-shadow: none;
-outline: none;
-}
-
-
-.login-section .submit-btn-for-login{
-  cursor: pointer;
-  color: #eee;
-  border: 0;
-  border-radius: 50Px;
-  padding: 10px;
-  width: 100px;
-  transition: box-shadow .3s ease-in-out;
- 
-}
-
-.login-section .submit-btn-for-login:hover{
-  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
-  -webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
-  -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
-}

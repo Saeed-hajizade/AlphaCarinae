@@ -9,26 +9,11 @@ import Header from './common/Header';
 const StartPage = () => {
     return (
         <Fragment>
-            <div className='start-page-container'>
-                {/* <nav className='start-page-nav clearfix'>
-                    <div className='start-page-nav-logo'>
-                        <img src="/images/logo.png" alt="" />
-                    </div>
-                    <div className='start-page-nav-menu'>
-
-                        <div className='start-page-nav-menu-container'>
-                            <div className='start-page-nav-menu-container-item'>
-                                <NavLink to="/AboutMe" className='start-page-nav-menu-container-link'>
-                                    درباره ما
-                                </NavLink>
-                            </div>
-                        </div>
-                        <div className='start-page-notification'><i className='fa fa-bell-o'></i></div>
-                    </div>
-                </nav> */}
+            <div className='start-page-container position-relative '>
+           
                 <Header />
-                <main className='start-page-main d-flex flex-lg-row flex-md-row justify-content-lg-between justify-content-md-between '>
-                    <div id="carouselExampleIndicators" className="carouser-section carousel slide" data-ride="carousel">
+                <main className='start-page-main d-flex flex-column align-items-center justify-content-between flex-lg-row flex-md-row flex-sm-column align-items-sm-center justify-content-sm-between  justify-content-lg-between justify-content-md-between '>
+                    <div id="carouselExampleIndicators" className="carouser-section carousel slide d-flex align-items-center h-100 col-lg-5 col-md-5 col-12" data-ride="carousel">
                         <ol className="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -63,10 +48,10 @@ const StartPage = () => {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
-                    <div className='horizontal-dividing-line-container'>
+                    <div className=' horizontal-dividing-line-container h-100 d-lg-flex d-md-flex justify-content-center align-items-center col-lg-1 d-none'>
                         <div className='line'></div>
                     </div>
-                    <div className='login-section gray-mellow'>
+                    <div className='login-section gray-mellow d-flex align-items-center overflow-auto h-100 col-lg-6 col-md-6 col-12 '>
 
                         <form className="w-100">
 
