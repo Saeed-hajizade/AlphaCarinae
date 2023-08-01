@@ -16,55 +16,71 @@ import EditUser from '../components/user/EditUser';
 
 
 const ChatRoomApp = (props) => {
-    const [loginedUser,setloginedUser]=useState();
-    useEffect(()=> {
+    const [loginedUser, setloginedUser] = useState();
+    useEffect(() => {
 
-        if(props.location.pathname ==="/PersonalChat"){
+        if (props.location.pathname === "/PersonalChat") {
             setloginedUser(props.location.state.loginedUser)
         }
 
-    },[])
+    }, [])
 
 
     return (
         <Fragment>
             <Switch>
-                <Route path={["/PersonalChat","/EditUser"]}>
+
+
+                <Route path={['/', '/chatroom']}>
+                    <Switch>
+                        <Route exact path='/' component={StartPage}></Route>
+                     
+                    </Switch>
+
+                </Route>
+
+
+                {/* <Route path={["/PersonalChat", "/EditUser"]}>
                     <CarinaeLayout>
                         <Switch>
-                            <Route path={'/PersonalChat'}  render={() => loginedUser !==null ?  (<PersonalChatContext><PersonalChat /></PersonalChatContext>):(<Redirect to="/" />)}></Route>
+                            <Route path={'/PersonalChat'} render={() => loginedUser !== null ? (<PersonalChatContext><PersonalChat /></PersonalChatContext>) : (<Redirect to="/" />)}></Route>
                             <Route path={'/EditUser/:id'} component={EditUser}></Route>
                         </Switch>
                     </CarinaeLayout>
                 </Route>
 
 
-                <Route path={['/chatroom', '/login']}>
-                    <MainLayout>
+                <Route path={['/', '/chatroom', '/login']}>
 
-                        <Switch>
-                            <Route path="/chatroom" component={ChatRoom}></Route>
-                            <Route path='/Login' component={Login}></Route>
+                    <Switch>
+                        <Route exact path='/' component={StartPage}></Route>
+                        <MainLayout>
 
-                        </Switch>
+                            <Switch>
+                                <Route path="/chatroom" component={ChatRoom}></Route>
+                                <Route path='/Login' component={Login}></Route>
 
-                    </MainLayout>
+
+                            </Switch>
+
+                        </MainLayout>
+                    </Switch>
                 </Route>
-                <Route path={['/','/AboutMe']}>
+                <Route path={[ '/AboutMe']}>
                     <Switch>
 
-                        <Route exact path='/' exact component={StartPage}></Route>
+
                         <AboutLayout>
                             <Switch>
                                 <Route path={'/AboutMe'} exact component={AboutMe}></Route>
-                                <Route path={'/IntroTeam'}  component={IntroducingTeam}></Route>
+                                <Route path={'/IntroTeam'} component={IntroducingTeam}></Route>
 
                                 <Route path={'/ContactUs'} component={ContactUs}></Route>
 
                             </Switch>
                         </AboutLayout>
                     </Switch>
-                </Route>
+                </Route> */}
 
             </Switch>
         </Fragment>

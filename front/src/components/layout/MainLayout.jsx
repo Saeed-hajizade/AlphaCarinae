@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import Header from '../common/Header';
+import Footer from '../common/Footer';
 
 
 const MainLayout = (props) => {
@@ -11,7 +12,7 @@ const MainLayout = (props) => {
 
         <section className="chat-app-container">
 
-            {pathname==='/'?null:<Header/>}
+       
 
             <div className="chat-app-body">
 
@@ -19,7 +20,7 @@ const MainLayout = (props) => {
 
             </div>
 
-
+           
 
         </section>
 
