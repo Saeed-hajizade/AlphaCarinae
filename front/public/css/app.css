@@ -386,12 +386,12 @@ span {
 .login-section .country-select-list select:focus,
 .login-section-information .user-information-for-login .code-country-for-login:focus,
 .login-section-information .user-information-for-login .user-phone-for-login:focus {
-box-shadow: none;
-outline: none;
+  box-shadow: none;
+  outline: none;
 }
 
 
-.login-section .submit-btn-for-login{
+.login-section .submit-btn-for-login {
   cursor: pointer;
   color: #eee;
   border: 0;
@@ -399,19 +399,19 @@ outline: none;
   padding: 10px;
   width: 100px;
   transition: box-shadow .3s ease-in-out;
- 
+
 }
 
-.login-section .submit-btn-for-login:hover{
-  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
-  -webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
-  -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.39);
+.login-section .submit-btn-for-login:hover {
+  box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.39);
+  -webkit-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.39);
 }
 
 
 
 .start-page-footer {
-height:250px;
+  height: 150px;
   direction: rtl;
   background: rgb(134, 2, 223);
   background: linear-gradient(90deg, rgba(134, 2, 223, 1) 0%, rgba(224, 29, 253, 1) 50%, rgba(201, 69, 252, 1) 100%);
@@ -578,9 +578,3 @@ height:250px;
   font-size: 0.8rem;
   font-weight: 100;
 }
-
-
-
-
-
-

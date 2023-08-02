@@ -11,7 +11,6 @@ import { NavLink } from 'react-router-dom';
 const Login = (props) => {
 
     const [username, setUsername] = useState('');
-    const [gender, setGender] = useState(null);
     const [password, setPassword] = useState('');
 
 
@@ -64,12 +63,12 @@ const Login = (props) => {
         e.preventDefault();
 
         try {
-            const {status, data } = await SignInService(user);
+            const { status, data } = await SignInService(user);
             if (status === 200) {
                 toastSucess('ورود باموفقییت انجام شد');
                 const loginedUser = data.user
 
-             localStorage.setItem('userId',data.user._id)
+                localStorage.setItem('userId', data.user._id)
 
                 props.history.push({
                     pathname: '/PersonalChat',
@@ -90,67 +89,48 @@ const Login = (props) => {
     }
 
 
+
+
+    const [phoneNumber, setphoneNumber] = useState('')
+
+
+    const handelformsubmit = async (e) => {
+        e.preventDefault();
+        // To Do Send Code
+
+       
+    }
     return (
-
         <Fragment>
+            <div className='login-section gray-mellow d-flex align-items-center col-lg-6 col-md-6 col-12 '>
 
-            <div className="account-wrapper">
-                <div className="account-container">
-                    <div className="sign-up-container">
-                        <form onSubmit={handleSinUpFormSubmit}>
-                            <h1>Create Account</h1>
-                            <div className="social-links">
-                                <div>
-                                    <a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a>
-                                </div>
-                                <div>
-                                    <a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                                <div>
-                                    <a href="#"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <span>or use your email for registration</span>
-                            <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Name" />
-                            {/* <input type="email" placeholder="Email" /> */}
+                <form className="w-100" onSubmit={handelformsubmit}>
 
-                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-                            <button className="form_btn">Sign Up</button>
-                        </form>
+                    <div className='country-select-list'>
+                        <select class="form-control">
+                            <option value={'iran'}>iran</option>
+                        </select>
                     </div>
-                    <div className="sign-in-container">
-                        <form onSubmit={handleSignInFormSubmit}>
-                            <h1>Sign In</h1>
-                            <div className="social-links">
-                                <div>
-                                    <a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a>
-                                </div>
-                                <div>
-                                    <a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                                <div>
-                                    <a href="#"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                            <span>or use your account</span>
-                            <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="نام کاربری" />
-                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="رمز عبور" />
-                            <button className="form_btn">Sign In</button>
-                        </form>
-                    </div>
-                    <div className="overlay-container">
-                        <div className="overlay-left">
-                            <h1>Welcome Back</h1>
-                            <p>To keep connected with us please login with your personal info</p>
-                            <button id="signIn" className="overlay_btn">Sign In</button>
+                    <div class="form-group mt-5 login-section-information">
+
+
+
+                        <label for="formGroupExampleInput">موبایل</label>
+                        <div className='d-flex justify-content-center align-items-center w-100 user-information-for-login'>
+                            <input type="text" class="form-control code-country-for-login" readOnly id="formGroupExampleInput" placeholder="" value={'+98'} />
+                            <input type="text" class="form-control user-phone-for-login" id="formGroupExampleInput" placeholder="XXX XXX XXX"
+                                value={phoneNumber}
+                                onChange={e => setphoneNumber(e.target.value)}
+                            />
                         </div>
-                        <div className="overlay-right">
-                            <h1>Hello, Friend</h1>
-                            <p>Enter your personal details and start journey with us</p>
-                            <button id="signUp" className="overlay_btn">Sign Up</button>
-                        </div>
+
                     </div>
-                </div>
+
+                    <div className='text-center'>
+                        <input type="submit" className='bg-app-color submit-btn-for-login' value="ارسال کد" />
+                    </div>
+                </form>
+
             </div>
 
             <script src="./script.js"></script>

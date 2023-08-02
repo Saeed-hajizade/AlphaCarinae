@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { Fragment } from 'react/cjs/react.production.min';
 import Footer from './common/Footer';
 import Header from './common/Header';
+import Login from './login/Login';
 
 
 const StartPage = () => {
+  
+
+
+
     return (
         <Fragment>
 
@@ -49,45 +54,11 @@ const StartPage = () => {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
-
-
-
-
-
-
-
-
-
                     <div className=' horizontal-dividing-line-container h-100 d-lg-flex d-md-flex justify-content-center align-items-center col-lg-1 d-none'>
                         <div className='line'></div>
                     </div>
-                    <div className='login-section gray-mellow d-flex align-items-center col-lg-6 col-md-6 col-12 '>
 
-                        <form className="w-100">
-
-                            <div className='country-select-list'>
-                                <select class="form-control">
-                                    <option value={'iran'}>iran</option>
-                                </select>
-                            </div>
-                            <div class="form-group mt-5 login-section-information">
-
-
-
-                                <label for="formGroupExampleInput">موبایل</label>
-                                <div className='d-flex justify-content-center align-items-center w-100 user-information-for-login'>
-                                    <input type="text" class="form-control code-country-for-login" readOnly id="formGroupExampleInput" placeholder="" value={'+98'} />
-                                    <input type="text" class="form-control user-phone-for-login" id="formGroupExampleInput" placeholder="XXX XXX XXX" />
-                                </div>
-
-                            </div>
-
-                            <div className='text-center'>
-                                <input type="submit" className='bg-app-color submit-btn-for-login' value="ارسال کد" />
-                            </div>
-                        </form>
-
-                    </div>
+                 <Login/>
                 </main>
 
 
