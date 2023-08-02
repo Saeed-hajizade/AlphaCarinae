@@ -3,12 +3,19 @@
 }
 
 .app-color{
-    color: #982EED;
+    color: #982EED !important;
 }
 
-
+.first-color {
+    color: #939194 !important;
+}
 
 /* background */
 .bg-app-color{
-    background-color: #982EED;
+    background-color: #982EED !important;
+}
+
+
+.bg-compnent-color {
+    background-color: #e7e7e7 !important;
 }

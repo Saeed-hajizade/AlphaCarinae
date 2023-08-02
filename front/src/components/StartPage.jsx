@@ -9,11 +9,12 @@ import Header from './common/Header';
 const StartPage = () => {
     return (
         <Fragment>
-            <div className='start-page-container position-relative '>
-           
+
+
+            <div className='d-flex flex-column  justify-content-between h-100'>
                 <Header />
-                <main className='start-page-main d-flex flex-column align-items-center justify-content-between flex-lg-row flex-md-row flex-sm-column align-items-sm-center justify-content-sm-between  justify-content-lg-between justify-content-md-between '>
-                    <div id="carouselExampleIndicators" className="carouser-section carousel slide d-flex align-items-center h-100 col-lg-5 col-md-5 col-12" data-ride="carousel">
+                <main className='start-page-main d-flex flex-column align-items-center justify-content-between  flex-lg-row flex-md-row flex-sm-column align-items-sm-center justify-content-sm-between  justify-content-lg-between justify-content-md-between  overflow-auto'>
+                    <div id="carouselExampleIndicators" className="carouser-section carousel slide d-flex align-items-center col-lg-5 col-md-5 col-12 overflow-hidden" data-ride="carousel">
                         <ol className="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -21,19 +22,19 @@ const StartPage = () => {
                         </ol>
                         <div className="carousel-inner">
                             <div className="carousel-item active">
-                                <img className="d-block" style={{ width: '400px', height: '300px' }} src="/images/istockphoto-493282372-170667a.jpg" alt="First slide" />
+                                <img className="d-block w-100 rounded"  src="/images/20230802_130803_434116509.jpg" alt="First slide" />
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>با دوستانتان در ارتباط باشید</h5>
                                 </div>
                             </div>
                             <div className="carousel-item">
-                                <img className="d-block " style={{ width: '400px', height: '300px' }} src="/images/blockchain-la-tecnologia-perfecta-para-cumplir-con-las-leyes-de-proteccion-de-datos.jpeg" alt="Second slide" />
+                                <img className="d-block w-100 rounded "  src="/images/blockchain-la-tecnologia-perfecta-para-cumplir-con-las-leyes-de-proteccion-de-datos.jpeg" alt="Second slide" />
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>چت ایمن</h5>
                                 </div>
                             </div>
                             <div className="carousel-item">
-                                <img className="d-block" style={{ width: '400px', height: '300px' }} src="/images/1c405d67bc666fc8048ce8d77ee56ab9.png" alt="Third slide" />
+                                <img className="d-block w-100 rounded"  src="/images/speed-photo.jpg" alt="Third slide" />
                                 <div className="carousel-caption d-none d-md-block">
                                     <h5>با سرعت بالا</h5>
                                 </div>
@@ -48,10 +49,19 @@ const StartPage = () => {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
+
+
+
+
+
+
+
+
+
                     <div className=' horizontal-dividing-line-container h-100 d-lg-flex d-md-flex justify-content-center align-items-center col-lg-1 d-none'>
                         <div className='line'></div>
                     </div>
-                    <div className='login-section gray-mellow d-flex align-items-center overflow-auto h-100 col-lg-6 col-md-6 col-12 '>
+                    <div className='login-section gray-mellow d-flex align-items-center col-lg-6 col-md-6 col-12 '>
 
                         <form className="w-100">
 
@@ -79,8 +89,11 @@ const StartPage = () => {
 
                     </div>
                 </main>
+
+
                 <Footer />
             </div>
+
         </Fragment>
     );
 }
