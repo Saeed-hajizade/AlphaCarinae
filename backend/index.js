@@ -2,7 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 const app = express();
-const bodyparser = require('body-parser')
+const bodyparser = require('body-parser');
+var nodemailer = require('nodemailer');
+
+
+
+
+
 
 const User = require("./models/User");
 const { uploadVoice, uploadFile, uploadImg } = require("./middleware/upload");
@@ -13,10 +19,87 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(express.static('public'));
 
-const server = app.listen(4000, (err) => {
+const server = app.listen(3000, (err) => {
 });
 
+app.get('/testRequest', async (req, res) => {
+    res.send(200)
+    console.log('hi it is saeed')
+})
 
+
+app.post("/verificationUser", async (req, res) => {
+    const userEmail = req.body.email;
+
+    let mailTransporter = await nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'hajizadesaeed.78@gmail.com',
+            pass: 'dditbgyeetfefoqf'
+        },
+        connectionTimeout: 5 * 60 * 1000, // 5 min
+    });
+
+    let mailDetails = {
+        from: 'hajizadesaeed.78@gmail.com',
+        to: userEmail,
+        subject: 'Test mail',
+        text: 'Node.js testing mail for GeeksforGeeks'
+    };
+
+    mailTransporter.sendMail(mailDetails, function(err, data) {
+        if(err) {
+            console.log(err)
+            console.log('Error Occurs');
+        } else {
+            console.log('Email sent successfully');
+        }
+    });
+
+    // let transporter = nodemailer.createTransport({
+    //     host: "smtp.gmail.com",
+
+    //     port: 465,
+    //     secure: true,
+
+    //     auth: {
+    //         // user: 'Carinae',
+    //         // pass: 'ca$ri#naE%4022023'
+    //         // user: 'carinaemessenger@gmail.com',
+    //         // pass: 'musncgfifgmdewgb',
+
+    //         user:'hajizadesaeed.78@gmail.com',
+    //         pass:'dditbgyeetfefoqf'
+    //     },
+
+    //     host: "smtp.gmail.com",
+    //     port: 465,
+    //     secure: true,
+    //     auth: {
+
+    //         //   type: "OAuth2",
+    //         //   user: "hajizadesaeed.78@gmail.com",
+    //         //   pass: "dditbgyeetfefoqf",
+
+
+    //         type: "OAuth2",
+    //         clientId: "000000000000-xxx.apps.googleusercontent.com",
+    //         clientSecret: "XxxxxXXxX0xxxxxxxx0XXxX0",
+    //     },
+
+    //     // tls: {
+    //     //     ciphers:'SSLv3'
+    //     // },
+    //     // logger: true,
+    //     // debug: true
+
+    // });
+
+
+
+
+
+})
 
 
 app.post("/SignUp", async (req, res) => {
@@ -76,7 +159,7 @@ const uploadImage = uploadImg.fields([
 ]);
 
 app.put("/EditUser/:id", uploadImage, async (req, res) => {
-   
+
     const user = await User.findOne({ _id: req.params.id });
 
     if (req.body.file) {
@@ -170,8 +253,9 @@ mySocket.on("connection", (socket) => {
         const username = message.receiver.name;
         const myUserName = message.sender.name;
         mySocket.to(`${myUserName}:${username}`).to(`${username}:${myUserName}`).emit("newMessage",
-         { ...message, date: new Date(), id: Math.floor(Math.random() * Math.pow(10, 7)),type:'text'
-         });
+            {
+                ...message, date: new Date(), id: Math.floor(Math.random() * Math.pow(10, 7)), type: 'text'
+            });
     });
 
     socket.on("isTyping", ({ sender, receiver, isTyping }) => {

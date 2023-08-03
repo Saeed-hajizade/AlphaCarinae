@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom';
+import { sendEmailForVerificationService } from '../../services/userServices';
 
 
 const Verification = (props) => {
 
     const { userEmail } = props.location.state
 
-    console.log(userEmail)
+    useEffect(async () => {
+
+        try {
+            const { data, status } = await sendEmailForVerificationService(userEmail)
+            
+        } catch (error) {
+
+        }
+    })
+
+    const clickSendVerificationCode = async () => {
+
+    }
 
 
     return (
@@ -18,7 +31,7 @@ const Verification = (props) => {
                 <div id="form">
                     <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
                     <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                    <button className="btn btn-primary btn-embossed">تائیید</button>
+                    <button className="btn btn-primary btn-embossed" onClick={clickSendVerificationCode}>تائیید</button>
                 </div>
 
                 <div>
