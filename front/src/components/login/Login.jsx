@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router';
 import { SignInService } from '../../services/userServices';
 import PersonalChat from '../chatroom/PersonalChat';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -91,51 +92,48 @@ const Login = (props) => {
 
 
 
-    const [phoneNumber, setphoneNumber] = useState('')
+    const [Email, setEmail] = useState('')
 
 
-    const handelformsubmit = async (e) => {
+    const handelformsubmit =  (e) => {
         e.preventDefault();
-        // To Do Send Code
 
-       
+        console.log(e)
+        // To Do Send Code
+        props.history.push({
+            pathname: '/verification',
+            state: {
+                userEmail: Email
+            }
+        });
+
     }
     return (
         <Fragment>
             <div className='login-section gray-mellow d-flex align-items-center col-lg-6 col-md-6 col-12 '>
 
-                <form className="w-100" onSubmit={handelformsubmit}>
-
-                    <div className='country-select-list'>
-                        <select class="form-control">
-                            <option value={'iran'}>iran</option>
-                        </select>
-                    </div>
+                <form className="w-100" action='' onSubmit={handelformsubmit}>
                     <div class="form-group mt-5 login-section-information">
-
-
-
-                        <label for="formGroupExampleInput">موبایل</label>
+                        <label for="formGroupExampleInput">ایمیل</label>
                         <div className='d-flex justify-content-center align-items-center w-100 user-information-for-login'>
-                            <input type="text" class="form-control code-country-for-login" readOnly id="formGroupExampleInput" placeholder="" value={'+98'} />
-                            <input type="text" class="form-control user-phone-for-login" id="formGroupExampleInput" placeholder="XXX XXX XXX"
-                                value={phoneNumber}
-                                onChange={e => setphoneNumber(e.target.value)}
+                            <input type="email" class="form-control user-phone-for-login" id="formGroupExampleInput" placeholder="caniae@gmail.com" required
+                                value={Email}
+                                onChange={e => setEmail(e.target.value)}
                             />
                         </div>
 
                     </div>
 
                     <div className='text-center'>
-                        <input type="submit" className='bg-app-color submit-btn-for-login' value="ارسال کد" />
+                        <input type="submit" value="ارسال کد"  className='bg-app-color submit-btn-for-login'   />
                     </div>
                 </form>
 
             </div>
 
-            <script src="./script.js"></script>
+            
         </Fragment>
     );
 }
 
-export default Login;
+export default withRouter(Login);

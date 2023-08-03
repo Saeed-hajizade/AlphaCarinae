@@ -10,6 +10,8 @@ const EditUser = (props) => {
 
     useEffect(async () => {
 
+        
+
         try {
             const { status, data } = await getSingleUserService(userId)
             if (status === 200) {

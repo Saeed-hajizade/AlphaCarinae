@@ -13,6 +13,7 @@ import MainLayout from '../components/layout/MainLayout';
 import Login from '../components/login/Login';
 import StartPage from '../components/StartPage';
 import EditUser from '../components/user/EditUser';
+import Verification from '../components/login/Verification';
 
 
 const ChatRoomApp = (props) => {
@@ -31,9 +32,10 @@ const ChatRoomApp = (props) => {
             <Switch>
 
 
-                <Route path={['/', '/chatroom']}>
+                <Route path={['/', '/chatroom','/verification']}>
                     <Switch>
                         <Route exact path='/' component={StartPage}></Route>
+                        <Route path="/verification" component={Verification}></Route>
                      
                     </Switch>
 
