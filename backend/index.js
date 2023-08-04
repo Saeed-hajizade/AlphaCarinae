@@ -29,76 +29,90 @@ app.get('/testRequest', async (req, res) => {
 
 
 app.post("/verificationUser", async (req, res) => {
+
+
+    const generateOtp = function (size) {
+        const zeros = '0'.repeat(size - 1);
+        const x = parseFloat('1' + zeros);
+        const y = parseFloat('9' + zeros);
+        const confirmationCode = String(Math.floor(x + Math.random() * y));
+        return confirmationCode;
+    }
+
     const userEmail = req.body.email;
 
-    let mailTransporter = await nodemailer.createTransport({
+    let mailTransporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'hajizadesaeed.78@gmail.com',
-            pass: 'dditbgyeetfefoqf'
+            // user: 'hajizadesaeed.78@gmail.com',
+            // pass: 'dditbgyeetfefoqf'
+
+            user: 'carinaemessenger@gmail.com',
+            pass: 'musncgfifgmdewgb',
         },
-        connectionTimeout: 5 * 60 * 1000, // 5 min
+        // connectionTimeout: 5 * 60 * 1000, // 5 min
     });
 
+    const ver_code = generateOtp(4);
+
     let mailDetails = {
-        from: 'hajizadesaeed.78@gmail.com',
+        from: 'carinaemessenger@gmail.com',
         to: userEmail,
-        subject: 'Test mail',
-        text: 'Node.js testing mail for GeeksforGeeks'
+        subject: 'Verification Code',
+        html: `
+        <h3>این کد چهار رقمی جهت تایید شما در پیام رسان کارینا می باشد.</h3>
+        <b>${ver_code}</b>
+        
+        `
     };
 
-    mailTransporter.sendMail(mailDetails, function(err, data) {
-        if(err) {
+    mailTransporter.sendMail(mailDetails, async function (err, data) {
+        if (err) {
             console.log(err)
-            console.log('Error Occurs');
+            console.log('ارسال ایمیل شکست خورد');
         } else {
-            console.log('Email sent successfully');
+            console.log('ایمیل با موفقییت ارسال شد');
+
+            const user = await User.findOne(userEmail);
+
+            if (user) {
+                const updatedUser = { $set: { username: user.username, password: ver_code, imageUrl: user.imageUrl } };
+                await User.updateOne(user, updatedUser);
+
+
+            } else if (!user) {
+                const newUser = new User({
+                    email: userEmail,
+
+                    password: ver_code
+                });
+
+                await newUser.save();
+
+            }
+            res.status(200)
+
+
+
         }
     });
 
-    // let transporter = nodemailer.createTransport({
-    //     host: "smtp.gmail.com",
-
-    //     port: 465,
-    //     secure: true,
-
-    //     auth: {
-    //         // user: 'Carinae',
-    //         // pass: 'ca$ri#naE%4022023'
-    //         // user: 'carinaemessenger@gmail.com',
-    //         // pass: 'musncgfifgmdewgb',
-
-    //         user:'hajizadesaeed.78@gmail.com',
-    //         pass:'dditbgyeetfefoqf'
-    //     },
-
-    //     host: "smtp.gmail.com",
-    //     port: 465,
-    //     secure: true,
-    //     auth: {
-
-    //         //   type: "OAuth2",
-    //         //   user: "hajizadesaeed.78@gmail.com",
-    //         //   pass: "dditbgyeetfefoqf",
-
-
-    //         type: "OAuth2",
-    //         clientId: "000000000000-xxx.apps.googleusercontent.com",
-    //         clientSecret: "XxxxxXXxX0xxxxxxxx0XXxX0",
-    //     },
-
-    //     // tls: {
-    //     //     ciphers:'SSLv3'
-    //     // },
-    //     // logger: true,
-    //     // debug: true
-
-    // });
 
 
 
 
 
+
+});
+
+app.post("/userapproval",async (req,res)=>{
+    const user=await User.findOne(req.body.email)
+
+    if (req.body.ver_code == user.password){
+        if(user.username !== null){
+            
+        }
+    }
 })
 
 
