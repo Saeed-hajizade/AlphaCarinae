@@ -4,7 +4,9 @@ const cors = require('cors');
 const app = express();
 const bodyparser = require('body-parser');
 var nodemailer = require('nodemailer');
+// var LocalStorage=require('node-localstorage').LocalStorage;
 
+// const localStorage = new LocalStorage('./scratch');
 
 
 
@@ -19,12 +21,18 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(express.static('public'));
 
-const server = app.listen(3000, (err) => {
+const server = app.listen(4000, (err) => {
 });
 
 app.get('/testRequest', async (req, res) => {
+
+
     res.send(200)
     console.log('hi it is saeed')
+})
+
+app.get('/testStorage', async (req, res) => {
+
 })
 
 
@@ -69,14 +77,17 @@ app.post("/verificationUser", async (req, res) => {
     mailTransporter.sendMail(mailDetails, async function (err, data) {
         if (err) {
             console.log(err)
-            console.log('ارسال ایمیل شکست خورد');
+            console.log("send email is not success");
         } else {
-            console.log('ایمیل با موفقییت ارسال شد');
+            console.log('send email is success');
 
-            const user = await User.findOne(userEmail);
 
+
+
+
+            const user = await User.findOne({email:userEmail});
             if (user) {
-                const updatedUser = { $set: { username: user.username, password: ver_code, imageUrl: user.imageUrl } };
+                const updatedUser = { $set: { password: ver_code, email: userEmail } };
                 await User.updateOne(user, updatedUser);
 
 
@@ -90,31 +101,75 @@ app.post("/verificationUser", async (req, res) => {
                 await newUser.save();
 
             }
-            res.status(200)
+            res.status(200).send({})
 
 
 
         }
     });
-
-
-
-
-
-
-
 });
 
-app.post("/userapproval",async (req,res)=>{
-    const user=await User.findOne(req.body.email)
 
-    if (req.body.ver_code == user.password){
-        if(user.username !== null){
-            
-        }
-    }
+
+app.post("/userapproval", async (req, res) => {
+    const email = req.body.email
+    console.log(req.body.email)
+    const user = await User.findOne({ email })
+    console.log(user)
+    // if (user) {
+    //     console.log("user is existence")
+    // }
+
+    // if (req.body.ver_code == user.password && req.body.email == user.email) {
+    //     if (user.username === null) {
+    //         console.log('user is not sign up')
+    //         res.status(2002).statusMessage('user is not sign up')
+    //     } else {
+    //         console.log('user is sign up')
+
+    //         res.status(2002).statusMessage('user is singn up')
+    //     }
+    // }
+    // if (req.body.email === user.email && req.body.ver_code !== user.password) {
+
+    // }
 })
 
+app.post("/SignUp", async (req, res) => {
+
+    const username = req.body.username
+    const email = req.body.email;
+    const password = req.body.ver_code;
+
+    const user = await User.findOne({ email: email, password: password });
+    if (user) {
+
+
+        const updatedUser = {
+            $set: {
+                email,
+                username,
+                password
+            }
+        }
+
+        // const updatedUser = new User({
+        //     email,
+        //     username,
+        //     password
+        // });
+        await User.updateOne(user, updatedUser);
+
+
+        return res.status(200).send({});
+
+
+    }
+    if (!user) {
+
+        return res.status(401).send({});
+    }
+});
 
 app.post("/SignUp", async (req, res) => {
 
@@ -241,7 +296,7 @@ app.post("/uploadFile", upFiles, async (req, res) => {
 
 
 mongoose
-    .connect("mongodb://localhost:27017/saeed", {
+    .connect("mongodb://localhost:27017/carinaemessenger", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
