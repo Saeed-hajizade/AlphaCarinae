@@ -19,9 +19,13 @@ export const getUsersService = () => {
     return Http.get(`${AppConfig}/getUsers`)
 }
 
+
+
 export const editUserService = (id, data) => {
     return Http.put(`${AppConfig}/EditUser/${id}`, data)
 }
+
+
 
 
 

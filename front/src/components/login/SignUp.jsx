@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SignUpService } from '../../services/userServices';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import { toastError, toastSucess } from '../../utils/Toastify';
 
-const SignUp = () => {
+const SignUp = (props) => {
 
     const { state } = useLocation();
     const { userInfor } = state
@@ -31,6 +31,14 @@ const SignUp = () => {
             if (status === 200) {
                 setUsername('')
                 toastSucess("کاربر ثبت شد")
+
+                localStorage.setItem("userId", userInfor._id)
+                props.history.push({
+                    pathname: '/PersonalChat',
+                    // state: {
+
+                    // }
+                });
             }
         } catch (error) {
             console.log(error)
@@ -63,4 +71,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default withRouter(SignUp);

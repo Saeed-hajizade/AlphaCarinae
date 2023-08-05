@@ -15,17 +15,28 @@ import StartPage from '../components/StartPage';
 import EditUser from '../components/user/EditUser';
 import Verification from '../components/login/Verification';
 import SignUp from '../components/login/SignUp';
+import { getSingleUserService } from '../services/userServices';
 
 
 const ChatRoomApp = (props) => {
     const [loginedUser, setloginedUser] = useState();
-    useEffect(() => {
+    const user_id = localStorage.getItem('userId')
+    console.log(user_id)
+    // useEffect(async () => {
+    //     if (props.location.pathname === "/PersonalChat") {
+    //         try {
+    //             const { state, data } = await getSingleUserService(user_id);
 
-        if (props.location.pathname === "/PersonalChat") {
-            setloginedUser(props.location.state.loginedUser)
-        }
+    //             setloginedUser(data)
 
-    }, [])
+    //         } catch {
+
+    //         }
+    //     }
+
+
+    // }, [])
+
 
 
     return (
@@ -38,7 +49,10 @@ const ChatRoomApp = (props) => {
                         <Route exact path='/' component={StartPage}></Route>
                         <Route path="/verification" component={Verification}></Route>
                         <Route path="/signup" component={SignUp}></Route>
-                     
+                        {/* <Route path='/PersonalChat' render={() => loginedUser !== null ? (<PersonalChatContext><PersonalChat /></PersonalChatContext>) : (<Redirect to="/" />)}></Route> */}
+                        <Route path='/personalchat' render={() => (<PersonalChatContext><PersonalChat /></PersonalChatContext>)}></Route>
+
+
                     </Switch>
 
                 </Route>

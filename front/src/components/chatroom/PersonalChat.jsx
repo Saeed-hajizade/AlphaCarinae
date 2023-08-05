@@ -1,14 +1,16 @@
-import React, { Fragment, useContext} from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { ReactMic } from 'react-mic'
 import ChatMessage from './ChatMessage';
 import { Done as SentIcon, DoneAll as SeenIcon } from '@material-ui/icons'
 import { personalChatContextProvider } from '../context/context';
-import {  withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { getSingleUserService } from '../../services/userServices';
+import { toastError } from '../../utils/Toastify';
 
 
 const PersonalChat = (props) => {
     const userId = localStorage.getItem('userId');
-
+    const [loginedUser, setLoginedUser] = useState({});
 
     const context = useContext(personalChatContextProvider);
     const {
@@ -41,7 +43,20 @@ const PersonalChat = (props) => {
 
     } = context;
 
-    const { loginedUser } = props.location.state
+    useEffect(async () => {
+
+        try {
+            const { state, data } = await getSingleUserService(userId);
+
+            setLoginedUser(data)
+        } catch (error) {
+            toastError("دریافت کاربر به مشکل خورد")
+        }
+    }, []);
+
+
+
+    // const { loginedUser } = props.location.state
 
 
     const handleShowUploadFileBox = () => {
@@ -53,6 +68,7 @@ const PersonalChat = (props) => {
 
 
         <Fragment>
+            {/* <p>this is personal chat</p> */}
             <div id="plist" className="people-list">
 
                 <div className="profile bg-compnent-color">

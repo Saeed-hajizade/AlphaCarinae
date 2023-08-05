@@ -33,15 +33,18 @@ const Verification = (props) => {
 
         try {
             const { status, data } = await signingService(verification_body);
-            const userInfor = {
-                ver_code,
-                userEmail
-            }
             const loginedUser = data.user
 
+            const userInfor = {
+                ver_code,
+                userEmail,
+                _id:loginedUser._id
+
+            }
             if (status === 200) {
+                localStorage.setItem("userId", loginedUser._id)
                 props.history.push({
-                    pathname: '/PersonalChat',
+                    pathname: '/personalchat',
                     state: {
                         loginedUser
                     }
@@ -50,6 +53,8 @@ const Verification = (props) => {
 
 
             if (status === 202) {
+              
+
                 props.history.push({
                     pathname: '/signup',
                     state: {

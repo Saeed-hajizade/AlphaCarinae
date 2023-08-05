@@ -72,7 +72,7 @@ const Login = (props) => {
                 localStorage.setItem('userId', data.user._id)
 
                 props.history.push({
-                    pathname: '/PersonalChat',
+                    pathname: '/personalchat',
                     state: {
                         loginedUser
                     }
