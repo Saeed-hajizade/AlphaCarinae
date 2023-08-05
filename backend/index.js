@@ -85,7 +85,7 @@ app.post("/verificationUser", async (req, res) => {
 
 
 
-            const user = await User.findOne({email:userEmail});
+            const user = await User.findOne({ email: userEmail });
             if (user) {
                 const updatedUser = { $set: { password: ver_code, email: userEmail } };
                 await User.updateOne(user, updatedUser);
@@ -95,7 +95,8 @@ app.post("/verificationUser", async (req, res) => {
                 const newUser = new User({
                     email: userEmail,
 
-                    password: ver_code
+                    password: ver_code,
+                    username: null
                 });
 
                 await newUser.save();
@@ -111,28 +112,23 @@ app.post("/verificationUser", async (req, res) => {
 
 
 
-app.post("/userapproval", async (req, res) => {
+app.post("/signin", async (req, res) => {
     const email = req.body.email
-    console.log(req.body.email)
     const user = await User.findOne({ email })
-    console.log(user)
-    // if (user) {
-    //     console.log("user is existence")
-    // }
 
-    // if (req.body.ver_code == user.password && req.body.email == user.email) {
-    //     if (user.username === null) {
-    //         console.log('user is not sign up')
-    //         res.status(2002).statusMessage('user is not sign up')
-    //     } else {
-    //         console.log('user is sign up')
+    if (req.body.ver_code == user.password && req.body.email == user.email) {
+        if (user.username === null) {
+            console.log('user is not sign up')
+            res.status(404).send({ Text: 'user is not sign up' })
+        } else {
+            console.log('user is sign up')
 
-    //         res.status(2002).statusMessage('user is singn up')
-    //     }
-    // }
-    // if (req.body.email === user.email && req.body.ver_code !== user.password) {
-
-    // }
+            res.status(200).send({})
+        }
+    }
+    if (req.body.email === user.email && req.body.ver_code !== user.password) {
+        res.status(500).send({Text:"code is wrong"})
+    }
 })
 
 app.post("/SignUp", async (req, res) => {
@@ -171,25 +167,25 @@ app.post("/SignUp", async (req, res) => {
     }
 });
 
-app.post("/SignUp", async (req, res) => {
+// app.post("/SignUp", async (req, res) => {
 
-    const username = req.body.username;
-    const password = req.body.password;
+//     const username = req.body.username;
+//     const password = req.body.password;
 
-    const user = await User.findOne({ username });
-    if (user) {
-        return res.status(200).send({});
-    }
-    else if (!user) {
-        const newUser = new User({
-            username,
+//     const user = await User.findOne({ username });
+//     if (user) {
+//         return res.status(200).send({});
+//     }
+//     else if (!user) {
+//         const newUser = new User({
+//             username,
 
-            password
-        });
-        await newUser.save();
-        res.status(201).send({ newUser });
-    }
-});
+//             password
+//         });
+//         await newUser.save();
+//         res.status(201).send({ newUser });
+//     }
+// });
 
 app.post("/SignIn", async (req, res) => {
 
