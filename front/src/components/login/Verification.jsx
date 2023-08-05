@@ -1,23 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom';
-import { sendEmailForVerificationService } from '../../services/userServices';
+import { sendEmailForVerificationService, signingService } from '../../services/userServices';
+import { toastError, toastSucess } from '../../utils/Toastify';
 
 
 const Verification = (props) => {
 
     const { userEmail } = props.location.state
 
+    const [char_1, setChar_1] = useState("");
+    const [char_2, setChar_2] = useState("");
+    const [char_3, setChar_3] = useState("");
+    const [char_4, setChar_4] = useState("");
+
     useEffect(async () => {
 
         try {
             const { data, status } = await sendEmailForVerificationService(userEmail)
-            
+            if (status == 200) {
+                toastSucess("ایمیل باموفقییت ارسال")
+            }
+
         } catch (error) {
 
         }
-    })
+    }, [userEmail])
 
-    const clickSendVerificationCode = async () => {
+    const handlclickSendVerificationCode = async () => {
+        const ver_code = char_1 + char_2 + char_3 + char_4;
+
+        const verification_body = { ver_code, email: userEmail }
+
+        try {
+            const { status, data } = await signingService(verification_body);
+            const userInfor = {
+                ver_code,
+                userEmail
+            }
+            const loginedUser = data.user
+
+            if (status === 200) {
+                props.history.push({
+                    pathname: '/PersonalChat',
+                    state: {
+                        loginedUser
+                    }
+                });
+            }
+
+
+            if (status === 202) {
+                props.history.push({
+                    pathname: '/signup',
+                    state: {
+                        userInfor
+                    }
+                });
+            }
+        } catch {
+            toastError('مشکلی پیش امده')
+        }
 
     }
 
@@ -29,9 +71,23 @@ const Verification = (props) => {
                 <h3>لطفاً کد تأیید 4 رقمی را که از طریق ایمیل ارسال کرده ایم وارد کنید:</h3>
                 <span>(مامی خواهیم مطمئن شویم این شما هستید)</span>
                 <div id="form">
-                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" /><input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
-                    <button className="btn btn-primary btn-embossed" onClick={clickSendVerificationCode}>تائیید</button>
+                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" className='char_1'
+                        value={char_1}
+                        onChange={e => setChar_1(e.target.value)}
+                    />
+                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" className='char_2'
+                        value={char_2}
+                        onChange={e => setChar_2(e.target.value)}
+                    />
+                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" className='char_3'
+                        value={char_3}
+                        onChange={e => setChar_3(e.target.value)}
+                    />
+                    <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" className='char_4'
+                        value={char_4}
+                        onChange={e => setChar_4(e.target.value)}
+                    />
+                    <button className="btn btn-primary btn-embossed" onClick={handlclickSendVerificationCode}>تائیید</button>
                 </div>
 
                 <div>

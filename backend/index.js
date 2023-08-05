@@ -70,7 +70,6 @@ app.post("/verificationUser", async (req, res) => {
         html: `
         <h3>این کد چهار رقمی جهت تایید شما در پیام رسان کارینا می باشد.</h3>
         <b>${ver_code}</b>
-        
         `
     };
 
@@ -80,37 +79,26 @@ app.post("/verificationUser", async (req, res) => {
             console.log("send email is not success");
         } else {
             console.log('send email is success');
-
-
-
-
-
             const user = await User.findOne({ email: userEmail });
             if (user) {
-                const updatedUser = { $set: { password: ver_code, email: userEmail } };
+                const updatedUser = { $set: { password: ver_code } };
                 await User.updateOne(user, updatedUser);
+                res.status(200).send({})
 
-
-            } else if (!user) {
+            } if (!user) {
                 const newUser = new User({
                     email: userEmail,
 
                     password: ver_code,
                     username: null
                 });
-
                 await newUser.save();
-
+                res.status(200).send({})
             }
-            res.status(200).send({})
-
-
 
         }
     });
 });
-
-
 
 app.post("/signin", async (req, res) => {
     const email = req.body.email
@@ -119,19 +107,19 @@ app.post("/signin", async (req, res) => {
     if (req.body.ver_code == user.password && req.body.email == user.email) {
         if (user.username === null) {
             console.log('user is not sign up')
-            res.status(404).send({ Text: 'user is not sign up' })
+            res.status(202).send({ Text: 'user is not sign up' })
         } else {
             console.log('user is sign up')
 
-            res.status(200).send({})
+            res.status(200).send({ user })
         }
     }
     if (req.body.email === user.email && req.body.ver_code !== user.password) {
-        res.status(500).send({Text:"code is wrong"})
+        res.status(500).send({ Text: "code is wrong" })
     }
 })
 
-app.post("/SignUp", async (req, res) => {
+app.post("/signup", async (req, res) => {
 
     const username = req.body.username
     const email = req.body.email;
@@ -157,13 +145,13 @@ app.post("/SignUp", async (req, res) => {
         await User.updateOne(user, updatedUser);
 
 
-        return res.status(200).send({});
+        res.status(200).send({});
 
 
     }
     if (!user) {
 
-        return res.status(401).send({});
+        res.status(401).send({});
     }
 });
 

@@ -522,6 +522,16 @@ span {
 
 
 
+/* Start SignUp Section */
+.singup-name-input{
+  border-radius: 50px;
+}
+.signup-btn{
+  border:none;
+  border-radius: 100%;
+}
+/* end SignUp Section */
+
 
 
 /* about page carinae */

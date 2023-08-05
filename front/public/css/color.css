@@ -11,8 +11,13 @@
 }
 
 /* background */
+.back-color-white{
+    background-color: #ffffff;
+}
 .bg-app-color{
+    color: #ffffff;
     background-color: #982EED !important;
+    
 }
 
 

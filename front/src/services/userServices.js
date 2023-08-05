@@ -1,9 +1,9 @@
 import Http from "./Http"
 import { AppConfig } from './Config.json'
 
-export const SignUpService = (user) => {
-    return Http.post(`${AppConfig}/SignUp`, user)
-}
+// export const SignUpService = (user) => {
+//     return Http.post(`${AppConfig}/SignUp`, user)
+// }
 
 export const SignInService = user => {
     return Http.post(`${AppConfig}/SignIn`, JSON.stringify(user))
@@ -32,5 +32,13 @@ export const sendEmailForVerificationService = email => {
         email
     }
 
-    return Http.post(`${AppConfig}/verificationUser`,emailInfo)
+    return Http.post(`${AppConfig}/verificationUser`, emailInfo)
 }
+export const signingService = (verificationBody) => {
+    return Http.post(`${AppConfig}/signin`, JSON.stringify(verificationBody))
+}
+
+export const SignUpService = (user) => {
+    return Http.post(`${AppConfig}/signup`, JSON.stringify(user))
+}
+
