@@ -13,36 +13,42 @@ const Verification = (props) => {
     const [char_3, setChar_3] = useState("");
     const [char_4, setChar_4] = useState("");
 
-    useEffect(async () => {
+    // useEffect(async () => {
 
-        try {
-            const { data, status } = await sendEmailForVerificationService(userEmail)
-            if (status == 200) {
-                toastSucess("ایمیل باموفقییت ارسال")
-            }
+    //     try {
+    //         const { data, status } = await sendEmailForVerificationService(userEmail)
+    //         if (status == 200) {
+    //             toastSucess("ایمیل باموفقییت ارسال")
+    //         }
 
-        } catch (error) {
+    //     } catch (error) {
 
-        }
-    }, [userEmail])
+    //     }
+    // }, [userEmail])
+
+    const resetValues = () => {
+        setChar_1('')
+        setChar_2('')
+        setChar_3('')
+        setChar_4('')
+    }
 
     const handlclickSendVerificationCode = async () => {
         const ver_code = char_1 + char_2 + char_3 + char_4;
 
         const verification_body = { ver_code, email: userEmail }
 
+        console.log(verification_body)
+
         try {
             const { status, data } = await signingService(verification_body);
             const loginedUser = data.user
 
-            const userInfor = {
-                ver_code,
-                userEmail,
-                _id:loginedUser._id
 
-            }
+
             if (status === 200) {
                 localStorage.setItem("userId", loginedUser._id)
+                resetValues();
                 props.history.push({
                     pathname: '/personalchat',
                     state: {
@@ -51,10 +57,16 @@ const Verification = (props) => {
                 });
             }
 
+            const userInfor = {
+                ver_code,
+                userEmail,
+                userId: loginedUser._id
+
+            }
 
             if (status === 202) {
-              
 
+                resetValues();
                 props.history.push({
                     pathname: '/signup',
                     state: {
@@ -62,7 +74,8 @@ const Verification = (props) => {
                     }
                 });
             }
-        } catch {
+        } catch (err) {
+            console.log(err)
             toastError('مشکلی پیش امده')
         }
 

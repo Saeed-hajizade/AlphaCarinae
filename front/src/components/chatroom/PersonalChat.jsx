@@ -43,17 +43,20 @@ const PersonalChat = (props) => {
 
     } = context;
 
+    
+
     useEffect(async () => {
 
         try {
-            const { state, data } = await getSingleUserService(userId);
+            const { status, data } = await getSingleUserService(userId);
 
-            setLoginedUser(data)
+            if (status == 200) {
+                setLoginedUser(data)
+            }
         } catch (error) {
             toastError("دریافت کاربر به مشکل خورد")
         }
     }, []);
-
 
 
     // const { loginedUser } = props.location.state
@@ -68,7 +71,7 @@ const PersonalChat = (props) => {
 
 
         <Fragment>
-            {/* <p>this is personal chat</p> */}
+           
             <div id="plist" className="people-list">
 
                 <div className="profile bg-compnent-color">

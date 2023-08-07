@@ -32,9 +32,9 @@ const SignUp = (props) => {
                 setUsername('')
                 toastSucess("کاربر ثبت شد")
 
-                localStorage.setItem("userId", userInfor._id)
+                localStorage.setItem("userId", userInfor.userId)
                 props.history.push({
-                    pathname: '/PersonalChat',
+                    pathname: '/personalchat',
                     // state: {
 
                     // }

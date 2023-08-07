@@ -9,11 +9,12 @@ import { getUsersService } from '../../services/userServices';
 
 
 const PersonalChatContext = ({ children, location }) => {
+    
     const scrolableGrid = useRef(null);
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState("");
-    const [userImageUrl,setUserImageUrl]=useState("");
-    
+    const [userImageUrl, setUserImageUrl] = useState("");
+
     const [loginedUser, setLoginedUser] = useState();
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([]);
@@ -99,7 +100,8 @@ const PersonalChatContext = ({ children, location }) => {
     useEffect(async () => {
         try {
             const { status, data } = await getUsersService();
-            setUsers(data.filter(u => u.username !== state.loginedUser.username))
+            // setUsers(data.filter(u => u.username !== state.loginedUser.username))
+            setUsers(data)
 
         } catch (ex) {
             toastError("کاربر ها واکشی نشدند,مشکلی پیش آمده")
@@ -292,7 +294,7 @@ const PersonalChatContext = ({ children, location }) => {
 
     }
 
-    const joinChatWithUser = (username,imageUrl) => {
+    const joinChatWithUser = (username, imageUrl) => {
         setMessages([]);
         if (user)
             socket.current.emit("leaveChat", { username: user, myUserName: state.loginedUser.username })

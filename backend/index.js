@@ -107,7 +107,7 @@ app.post("/signin", async (req, res) => {
     if (req.body.ver_code == user.password && req.body.email == user.email) {
         if (user.username === null) {
             console.log('user is not sign up')
-            res.status(202).send({ Text: 'user is not sign up' })
+            res.status(202).send({ user })
         } else {
             console.log('user is sign up')
 
